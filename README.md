@@ -1,6 +1,6 @@
 # agent-skills
 
-Personal collection of reusable [Claude Code](https://claude.com/claude-code) assets - skills and a CLAUDE.md starter - to drop into coding/SWE projects.
+Personal collection of reusable [Claude Code](https://claude.com/claude-code) assets - skills and a CLAUDE.md starter - to drop into coding/SWE and other types of projects.
 
 ## Contents
 
