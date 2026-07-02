@@ -14,8 +14,11 @@ Skills usable via the `Skill` tool or a `/slash-command`, grouped by domain (`sw
 |---|---|
 | `swe/code-smell-audit` | Code-smell audit and refactor - scans for silent fallbacks, dead code, missing guards, and other reliability anti-patterns, then fixes what you approve. Invoke with `/code-smell-audit`. |
 | `swe/gql-frontend-arch` | Architecture guidance for a frontend web app on a GraphQL backend - module boundaries, state/data-fetching, where logic lives, the API seam, tables, forms, and testing strategy. |
+| `writing/world-building` | Interactive fiction world-building - interviews you to build a coherent story world (genre-aware), enforces rules-generate-conflict and "the world is not the story" discipline, then suggests a world-bible structure. Invoke with `/world-building`. |
+| `writing/world-audit` | Audit an existing fiction world - scans your notes, bible, or draft for missing rules, contradictions, unbounded magic/tech, infodump risk, and thin sensory detail, then fixes what you approve. Invoke with `/world-audit`. |
 
 ## Usage
 
 - **Starter:** copy `CLAUDE.starter.md` → `<project>/CLAUDE.md`, then adapt and delete the leading comment block.
-- **Skills:** copy the individual skill subfolder into a project's `.claude/skills/` - e.g. `skills/swe/code-smell-audit/` → `<project>/.claude/skills/code-smell-audit/` - then invoke by name. The `swe/` grouping is for organizing this repo; it isn't part of the invocation path.
+- **Skills:** copy the individual skill subfolder into a project's `.claude/skills/` - e.g. `skills/swe/code-smell-audit/` → `<project>/.claude/skills/code-smell-audit/` - then invoke by name. The `swe/` and `writing/` groupings are for organizing this repo; they aren't part of the invocation path.
+- **`references.md` is author-only.** When a skill folder contains a `references.md`, it's a memory-jog recording what the skill was built on - not part of the skill. Leave it out when copying a skill into a project.
