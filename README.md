@@ -16,6 +16,8 @@ Skills usable via the `Skill` tool or a `/slash-command`, grouped by domain (`sw
 | `swe/gql-frontend-arch` | Architecture guidance for a frontend web app on a GraphQL backend - module boundaries, state/data-fetching, where logic lives, the API seam, tables, forms, and testing strategy. |
 | `writing/world-building` | Interactive fiction world-building - interviews you to build a coherent story world (genre-aware), enforces rules-generate-conflict and "the world is not the story" discipline, then suggests a world-bible structure. Invoke with `/world-building`. |
 | `writing/world-audit` | Audit an existing fiction world - scans your notes, bible, or draft for missing rules, contradictions, unbounded magic/tech, infodump risk, and thin sensory detail, then fixes what you approve. Invoke with `/world-audit`. |
+| `writing/character-building` | Interactive fiction character-building - interviews you to build one character in depth or a whole cast web, centering the want-vs-need contradiction, the ghost and lie, and revelation through choice under pressure. Invoke with `/character-building`. |
+| `writing/character-audit` | Audit existing fiction characters - scans your profiles, notes, or draft for want-without-need, flat/too-perfect/too-evil characters, obstacle-only opponents, dumped characterization, and dialogue without subtext, then fixes what you approve. Invoke with `/character-audit`. |
 
 ## Usage
 
