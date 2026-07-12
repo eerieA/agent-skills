@@ -145,6 +145,45 @@ document why.
 
 ---
 
+### 8. No-op wrapper — identity logic dressed up as work (Medium)
+
+A function (or block) whose branches all collapse to the same trivial result the caller
+could get directly, but whose name, comment, or type signature claims it does something
+meaningful. The ceremony impersonates logic: a reader trusts the name and assumes a
+guard, a transform, or a side effect is happening when nothing is.
+
+The canonical shape is an identity function — every path returns its own input unchanged:
+
+```
+// returnRowErrorOnTxFailure returns the error from in-transaction work so the row
+// fails and processing does not continue.
+func returnRowErrorOnTxFailure(err error) error {
+    if err == nil {
+        return nil
+    }
+    return err
+}
+```
+
+Both branches return `err` (when `err` is nil, `err` *is* nil) — the whole function is
+`return err`. The comment promises control-flow significance the code does not provide.
+
+Look for:
+- Functions where every `return`/branch yields the input unchanged (`return err`,
+  `return x`, `if v: return v else: return v`)
+- A wrapper that only forwards its argument with no added context, validation, logging,
+  or transformation
+- A name or comment asserting behavior ("ensures…", "so that…", "guards against…") that
+  the body does not actually implement
+- Conditionals whose arms produce identical results (`if c: return a else: return a`)
+
+**Fix pattern:** delete the wrapper and use the value directly at the call sites. If the
+wrapper was *meant* to do something (add context to the error, log, validate), make it
+actually do that — e.g. wrap with `fmt.Errorf("tx failed: %w", err)` — so the name
+becomes true. Never keep a no-op whose only output is a misleading name.
+
+---
+
 ## Severity definitions
 
 | Severity | Meaning |
