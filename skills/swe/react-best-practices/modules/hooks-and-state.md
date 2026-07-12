@@ -231,6 +231,46 @@ useEffect(() => {
 }, [/* deps */]);
 ```
 
+### Don't guess at layout timing with chained rAF / setTimeout
+
+Nesting `requestAnimationFrame` (or piling on `setTimeout`) to "wait until the DOM
+has settled" is a magic-number timing hack, not a synchronization mechanism. It
+happens to work on the author's machine and silently breaks under different render
+timing — slower devices, more rows, a heavier commit. There's no signal that says
+"measurement is done" here; the frame count is a guess.
+
+```tsx
+// ❌ Anti-pattern: triple rAF to "ensure the virtualizer has measured"
+requestAnimationFrame(() => {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      if (scrollRef.current) {
+        scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+      }
+    });
+  });
+});
+```
+
+Subscribe to the actual "layout changed" signal instead:
+
+- **`useLayoutEffect`** keyed to the measured value, so the scroll runs synchronously
+  after the DOM reflects that value and before paint.
+- **`ResizeObserver`** when you need to react to an element's measured size settling.
+- **A virtualizer's own measurement API** — e.g. TanStack Virtual exposes total size
+  and remeasure callbacks; scroll in response to those, not to a frame guess.
+
+```tsx
+// ✅ Scroll when the measured size actually changes
+useLayoutEffect(() => {
+  const el = scrollRef.current;
+  if (el) el.scrollTop = el.scrollHeight;
+}, [totalSize]); // totalSize from the virtualizer / observed height
+```
+
+If you genuinely need to defer past one paint, a *single* `requestAnimationFrame` with
+a comment explaining why is the ceiling — chaining more is a smell that you're guessing.
+
 ## useCallback & useMemo
 
 ```tsx

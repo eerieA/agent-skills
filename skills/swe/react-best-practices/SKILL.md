@@ -68,6 +68,7 @@ Load detailed guidance based on context:
 - Mutate state directly
 - Create functions or objects inline in JSX when passed to memoized children
 - Skip `useEffect` cleanup (memory/listener leaks)
+- Chain `requestAnimationFrame`/`setTimeout` to guess at layout timing — subscribe to a real signal (`useLayoutEffect` keyed to the measured value, `ResizeObserver`, or the virtualizer's measurement API)
 - Ignore React Strict Mode warnings
 - Reach for Redux Toolkit or TanStack Query when local state/Context is sufficient
 - Mix Server Component and Client Component concerns (hooks/browser APIs in a Server Component)
