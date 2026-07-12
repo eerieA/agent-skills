@@ -2,7 +2,8 @@
 name: code-smell-audit
 description: >
   Code smell audit and refactoring skill. Scans a codebase (or specified files)
-  for silent fallbacks, dead code, missing guards, hardcoded external names, and
+  for silent fallbacks, dead code, missing guards, hardcoded external names,
+  order-dependent behavior, duplicated sources of truth, and
   other reliability anti-patterns. Produces a prioritized findings table, then
   fixes what the user approves. Invoke with /code-smell-audit.
 ---
@@ -181,6 +182,75 @@ Look for:
 wrapper was *meant* to do something (add context to the error, log, validate), make it
 actually do that — e.g. wrap with `fmt.Errorf("tx failed: %w", err)` — so the name
 becomes true. Never keep a no-op whose only output is a misleading name.
+
+---
+
+### 9. Order-dependent behavior over an unordered collection (High)
+
+Code whose *result* depends on the order in which items are processed, but which iterates
+a collection with no guaranteed order — a hash map/set, a query without `ORDER BY`, a
+parallel reduce, filesystem listing, or an event-handler list built in registration
+order. It works on the author's machine because the order happens to be stable there,
+then silently produces a different result under a different runtime, dataset size, or
+platform. The same failure class covers unseeded randomness used where a reproducible
+sequence is needed.
+
+The tell is that reordering the inputs would change the output, yet nothing pins the order:
+
+```python
+# Applies discounts by iterating a dict — insertion order is not the domain order.
+for rule in discount_rules.values():   # order is incidental, not intended
+    price = rule.apply(price)          # non-commutative: order changes the result
+```
+
+If `discount_rules` were built differently, `price` would differ — with no error.
+
+Look for:
+- Iteration over a `set`/`dict`/hash map where the loop body accumulates, mutates shared
+  state, or emits output in that order
+- A DB query feeding ordered output or "first match" logic with no `ORDER BY`
+- Reductions/merges of results gathered concurrently (thread pool, `Promise.all`,
+  goroutines) where combination is not commutative
+- "First one wins" / "last one wins" resolution over an unordered source
+- `random(...)` / `shuffle(...)` without a seed in code that must reproduce (tests,
+  simulations, fixtures) — see the fuzz/property-testing note in the testing skill
+
+**Fix pattern:** sort explicitly by a stable, meaningful key at the point of iteration
+(`sorted(rules, key=...)`, `ORDER BY`), or use an ordered container if insertion order
+*is* the intended contract — and say so in a comment. For randomness that must repeat,
+thread an explicit seed through. The test: if reordering the input can change the output,
+the order must be pinned deliberately, not inherited by accident.
+
+---
+
+### 10. Duplicated source of truth that can silently drift (Medium)
+
+The same fact — an enum value, a route path, a config key, a type's field list, a status
+name — is written out by hand in two or more places that must stay in agreement, with
+nothing enforcing it. When one copy is updated and the others aren't, the mismatch does
+not fail loudly; it produces a subtle wrong-mapping bug far from either edit site.
+
+```
+// Declared here…
+enum ComponentType { Bleed, Poison, /* ... */ };
+
+// …and the name repeated by hand there — update one, forget the other, silent drift.
+REGISTER_COMPONENT(Bleed, "bleed");   // string "bleed" must match the enum, but nothing checks
+```
+
+Look for:
+- A name/value duplicated across an enum and a lookup table, a constant and a string key,
+  a type and its (de)serializer, a route constant and its handler registration
+- Parallel lists that must line up by position or by name across files
+- "Add a new X in three places" steps in a README or comment — a standing drift hazard
+- Copy-pasted blocks that encode the same fact, where updating one but not the rest breaks
+  a mapping rather than raising an error
+
+**Fix pattern:** make one place the source of truth and derive the rest — generate the
+table from the enum (codegen/build step), read the key from the single constant, drive
+(de)serialization from the type. Where full derivation is overkill, add a compile-time or
+startup assertion that the copies agree, so drift fails loudly instead of silently. Don't
+add a heavy abstraction for a single pair — a check that they match may be enough.
 
 ---
 
