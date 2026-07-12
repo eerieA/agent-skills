@@ -2,8 +2,9 @@
   CLAUDE.starter.md — a baseline CLAUDE.md for a new coding/SWE project.
 
   HOW TO USE: Copy this to a project's root as CLAUDE.md, then PRUNE.
-  - Rules 1–4 are project-agnostic; keep them verbatim unless you disagree.
-  - Everything in [brackets] is a slot to fill or a section to delete.
+  - Project-agnostic and meant to stay: the Communication & safety block,
+    rules 1–5, and the Git workflow section. Keep them unless you disagree.
+  - Rule 6 and everything in [brackets] is a slot to fill or a section to delete.
   - When in doubt, delete. A short, true CLAUDE.md beats a long one with
     stale or irrelevant instructions — every line competes for attention.
   - Delete this comment block once you've adapted the file.
@@ -20,8 +21,15 @@ A project that [insert one-sentence project introduction].
 
 ## Behavioral guidelines
 
-[Recommended default working agreement for coding agents. Rules 1–4 apply to
-almost any project; keep them. Edit or delete rule 5 to match your stack.]
+[Recommended default working agreement for coding agents. The Communication &
+safety block and rules 1–5 apply to almost any project; keep them. Edit or delete
+rule 6 to match your stack.]
+
+**Communication & safety** (cross-cutting; apply to every response):
+- **No filler openers.** Skip "Great question!", "Certainly!", and acknowledgments — lead with the answer.
+- **Match length to the task.** Short answers for simple questions; full detail for complex work. Don't pad with restatements or closing recaps.
+- **Flag uncertainty; never fabricate.** If unsure of a fact, date, number, or API, say so before stating it. Don't fill gaps with plausible-sounding guesses.
+- **Delete safely.** Prefer a recoverable delete (OS trash, or `trash-cli` if available). If only `rm`/`rm -rf` is available, stop and ask — never silently hard-delete.
 
 ### 1. Think Before Coding
 
@@ -63,7 +71,7 @@ The test: Every changed line should trace directly to the user's request.
 
 ### 4. Goal-Driven Execution
 
-**Define success criteria. Loop until verified.**
+**Plan the full scope. Define success criteria. Loop until verified.**
 
 Transform tasks into verifiable goals:
 - "Add validation" → "Write tests for invalid inputs, then make them pass"
@@ -79,7 +87,28 @@ For multi-step tasks, state a brief plan:
 
 Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
 
-### 5. Design Standard
+Two planning disciplines:
+- **No silent scope reduction.** Deliver every item the user asked for. If scope should shrink, say so and why — don't quietly defer or drop parts.
+- **Sequence to avoid rework.** Identify dependencies and shared foundations up front, and order steps so each builds on the last rather than churning earlier work.
+
+### 5. Script Uniform Edits
+
+**When the same mechanical change repeats across many sites, script it — don't hand-edit each one.**
+
+Before applying a repetitive edit file-by-file, stop and ask: is this the *same*
+transform at N call sites? If so, a single `sed`/codemod/search-replace usually applies
+it everywhere in one pass — faster, uniform, and far cheaper than editing each site by hand.
+
+- Uniform pattern across many sites → reach for a script (`sed`, `ast-grep`, editor
+  search-replace, a codemod).
+- Show the transform (the command or regex) and a sample before/after, then apply it.
+- Verify the result compiles/tests pass — a bad regex fails everywhere at once, so check.
+- Genuinely one-off or context-dependent edits → edit by hand. Don't script what isn't uniform.
+
+The test: if you're about to make the identical change a third time, you should be
+running a command, not typing it again.
+
+### 6. Design Standard
 
 **Hold non-trivial code to a consistent design standard.**
 
@@ -91,6 +120,15 @@ structuring a feature, naming it, drawing a boundary against an API, or layering
 validation and errors — consult [the `[skill-or-doc-name]` skill / `[path/to/doc]`].
 It reinforces rules 2 and 3 above (simplicity, surgical changes).
 
+## Git workflow
+
+[Project-agnostic git defaults. Keep unless a project overrides them; add
+project-specific commit/branch conventions under Project-Specific Conventions below.]
+
+- **Ask before pushing.** Unless given upfront permission, state the remote/branch and wait for approval — this includes force pushes.
+- **Ask before opening a PR.** Unless given upfront permission, show the title, body, target branch, and draft status, then wait for approval.
+- **No AI attribution.** Never add `Co-Authored-By`, bot signatures, or any AI-authorship text to commits, PRs, or git metadata.
+
 ## Project-Specific Conventions
 
 [OPTIONAL — capture the few non-obvious, project-specific rules an agent can't
@@ -100,7 +138,7 @@ anything obvious from reading the codebase does NOT belong here.]
 - **Build / run:** [e.g. `npm run dev`, `make build`]
 - **Test:** [e.g. `pytest -q`, `npm test`; note which tests to run before claiming done]
 - **Lint / format:** [e.g. `ruff check`, `prettier --write`; run before finishing]
-- **Commits / PRs:** [e.g. conventional commits; never push to main; branch naming]
+- **Commits / PRs:** [conventions only — commit style (e.g. conventional commits), branch naming. Push/PR *approval* rules live in the Git workflow section above.]
 - **Gotchas:** [anything that will silently bite — env setup, codegen step, etc.]
 
 ## Project Knowledge Base Files

@@ -17,7 +17,7 @@ Personal collection of reusable [Claude Code](https://claude.com/claude-code) as
 ## Contents
 
 ### `CLAUDE.starter.md`
-A baseline `CLAUDE.md` for a new project. It's a starter, not a template: copy it to a project root as `CLAUDE.md`, then prune. Bracketed `[...]` slots get filled or deleted; the default working agreement (rules 1–4) is project-agnostic and meant to stay. When in doubt, delete.
+A baseline `CLAUDE.md` for a new project. It's a starter, not a template: copy it to a project root as `CLAUDE.md`, then prune. Bracketed `[...]` slots get filled or deleted; the default working agreement (rules 1–5) is project-agnostic and meant to stay. When in doubt, delete.
 
 ### `skills/`
 Skills usable via the `Skill` tool or a `/slash-command`, grouped by domain (`swe/` for software work; future domains get their own folder).
