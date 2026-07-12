@@ -29,6 +29,7 @@ Skills usable via the `Skill` tool or a `/slash-command`, grouped by domain (`sw
 | `swe/code-smell-audit` | Code-smell audit and refactor - scans for silent fallbacks, dead code, missing guards, and other reliability anti-patterns, then fixes what you approve. Invoke with `/code-smell-audit`. |
 | `swe/gql-frontend-arch` | Architecture guidance for a frontend web app on a GraphQL backend - module boundaries, state/data-fetching, where logic lives, the API seam, tables, forms, and testing strategy. |
 | `swe/react-best-practices` | Senior-level guidance for building and reviewing production React + TypeScript - component architecture, hooks, state management (Context, Redux Toolkit, TanStack Query), performance, Server Components, testing, and UI/interaction polish. |
+| `swe/testing-discipline` | Language- and framework-agnostic testing discipline - test-first / prove-it-with-a-failing-test workflow, what makes a test good, how to size a suite (unit/integration/e2e), and fuzz/property testing for combinatorial systems with reproducible seeds. |
 
 #### Writing
 
