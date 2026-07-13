@@ -14,16 +14,10 @@ when copying the skill into a project.
   specifics into stack-agnostic pseudocode, and dropped the browser-testing and
   subagent sections as out of scope for this repo.
 
-- **Mewgenics source-code review (YouTube talk, Tyler / Edmund McMillen), captured in
-  scratch `tmp.md`.** Origin of the **Fuzz & Property Testing** section: no unit tests,
-  instead a headless harness that runs the game with randomized cats/levels as fast as
-  possible overnight; every crashing/soft-locking run's random seed is saved for
-  deterministic replay and morning triage. Also the source of two framing points —
-  fuzzing finds breakage not balance (win-rate metrics from random play are noise), and
-  the crash-vs-"should-behave-differently" triage distinction.
+- **Mewgenics source-code review (YouTube talk, Tyler / Edmund McMillen).**  
+(https://www.youtube.com/watch?v=grY-1x7Z40k)  
+Origin of the **Fuzz & Property Testing** section: no unit tests, instead a headless harness that runs the game with randomized cats/levels as fast as possible overnight; every crashing/soft-locking run's random seed is saved for deterministic replay and morning triage. Also the source of two framing points — fuzzing finds breakage not balance (win-rate metrics from random play are noise), and the crash-vs-"should-behave-differently" triage distinction.
 
 ## Related repo content
 
-- `code-smell-audit` §9 "Order-dependent behavior over an unordered collection" — the
-  determinism prerequisite for fuzzing cross-links to it; both trace to the same Mewgenics
-  point about sorted/deterministic iteration order.
+- `code-smell-audit` §9 "Order-dependent behavior over an unordered collection" — the determinism prerequisite for fuzzing cross-links to it; both trace to the same Mewgenics point about sorted/deterministic iteration order.

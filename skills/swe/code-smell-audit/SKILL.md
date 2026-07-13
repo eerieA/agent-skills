@@ -3,8 +3,8 @@ name: code-smell-audit
 description: >
   Code smell audit and refactoring skill. Scans a codebase (or specified files)
   for silent fallbacks, dead code, missing guards, hardcoded external names,
-  order-dependent behavior, duplicated sources of truth, and
-  other reliability anti-patterns. Produces a prioritized findings table, then
+  order-dependent behavior, duplicated sources of truth, timing band-aids over
+  race conditions, and other reliability anti-patterns. Produces a prioritized findings table, then
   fixes what the user approves. Invoke with /code-smell-audit.
 ---
 
@@ -251,6 +251,49 @@ table from the enum (codegen/build step), read the key from the single constant,
 (de)serialization from the type. Where full derivation is overkill, add a compile-time or
 startup assertion that the copies agree, so drift fails loudly instead of silently. Don't
 add a heavy abstraction for a single pair — a check that they match may be enough.
+
+---
+
+### 11. Delay as synchronization — a timing band-aid over an ordering bug (High)
+
+An arbitrary time or frame delay inserted so a bug "goes away": `setTimeout(fn, 0)`, wait
+one frame before acting, `sleep()` then retry, yield a coroutine once, `queueMicrotask`,
+`requestAnimationFrame` used to defer logic (not paint). The delay does not *fix* the
+underlying ordering or lifecycle problem — it just reorders two operations often enough
+that the race stops reproducing on the author's machine. Under load, on slower hardware,
+or with different scheduling it comes back, now harder to debug because the trigger is
+timing-dependent.
+
+The tell is that no one can explain *why that specific delay* is correct — only that the
+symptom disappears with it and returns without it. The canonical case: opening a dropdown
+on the same frame as the click that opened it, where the still-active "click outside"
+immediately dismisses it — so a one-frame delay is added instead of ordering the events.
+
+```js
+// The dropdown dismisses itself because the opening click is still "active & outside".
+// "Fix": wait a frame so the click has cleared. Works until it doesn't.
+onClick = () => setTimeout(() => openDropdown(), 0);   // why 0? why a frame? nobody knows
+```
+
+Look for:
+- `setTimeout(..., 0)` / `setTimeout(..., 1)` / tiny hardcoded delays whose comment (if any)
+  says "so that…", "to let X finish", "otherwise it breaks"
+- Waiting one or more frames (`requestAnimationFrame`, `yield return null`, coroutine yield,
+  `process.nextTick`, `queueMicrotask`) before running *logic* that has an ordering
+  dependency — as opposed to deferring *paint*
+- `sleep`/`delay` then retry, or a poll loop, standing in for waiting on an actual signal
+- A magic delay that was tuned by trial and error until the flake stopped
+
+**Fix pattern:** fix the ordering, don't hide it. Make the dependency explicit — establish
+the correct sequence (handle the triggering event before building the state that observes
+it), consume/capture the event so a later observer doesn't re-handle it, or gate on the
+real readiness signal (a callback, promise, "mounted"/"first frame" flag, or observer)
+instead of a guessed interval. If an element must ignore input on the frame it appears,
+encode that lifecycle rule explicitly rather than delaying its creation. A *single*
+deferral with a comment that explains the precise ordering guarantee it provides can be
+legitimate; a tuned magic delay with no such explanation is the smell. (For the
+React/DOM-layout-specific instance of this — chained rAF to guess at layout timing — see
+the `react-best-practices` skill.)
 
 ---
 

@@ -50,6 +50,7 @@ Before implementing:
 - No "flexibility" or "configurability" that wasn't requested.
 - No error handling for impossible scenarios.
 - If you write 200 lines and it could be 50, rewrite it.
+- But shorter-*looking* ≠ simpler. Fewer lines at the top by hiding the same complexity in a clever one-liner is not the goal — extracting each job into a named function is. Extract until every function reads at one level of abstraction and its name says what the old step-comment said (`create_next_layer`, not `// [Step 1]: build the next layer`). Total line count may barely change; readability is what improves.
 
 Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
 
