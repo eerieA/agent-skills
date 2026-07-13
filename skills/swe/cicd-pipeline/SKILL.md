@@ -1,5 +1,5 @@
 ---
-name: pipeline-design
+name: cicd-pipeline
 description: >
   Platform-agnostic CI/CD deployment pipeline design and review. Covers how to
   stage a pipeline (build → test → promote → deploy → verify), where approval and

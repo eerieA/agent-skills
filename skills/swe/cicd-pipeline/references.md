@@ -1,4 +1,4 @@
-# references — pipeline-design
+# references — cicd-pipeline
 
 Author-only memory-jog for what this skill was built on. Not part of the skill; leave out
 when copying the skill into a project.
