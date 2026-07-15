@@ -9,6 +9,7 @@ Personal collection of reusable [Claude Code](https://claude.com/claude-code) as
         - [`CLAUDE.starter.md`](#claudestartermd)
         - [`skills/`](#skills)
             - [Software](#software)
+            - [UI/UX](#uiux)
             - [Writing](#writing)
     - [Usage](#usage)
 
@@ -20,7 +21,7 @@ Personal collection of reusable [Claude Code](https://claude.com/claude-code) as
 A baseline `CLAUDE.md` for a new project. It's a starter, not a template: copy it to a project root as `CLAUDE.md`, then prune. Bracketed `[...]` slots get filled or deleted; the default working agreement (rules 1–5) is project-agnostic and meant to stay. When in doubt, delete.
 
 ### `skills/`
-Skills usable via the `Skill` tool or a `/slash-command`, grouped by domain (`swe/` for software work; future domains get their own folder).
+Skills usable via the `Skill` tool or a `/slash-command`, grouped by domain (`swe/` for software work, `uiux/` for interface design; future domains get their own folder).
 
 #### Software
 
@@ -34,6 +35,15 @@ Skills usable via the `Skill` tool or a `/slash-command`, grouped by domain (`sw
 | `swe/testing-discipline` | Language- and framework-agnostic testing discipline - test-first / prove-it-with-a-failing-test workflow, what makes a test good, how to size a suite (unit/integration/e2e), and fuzz/property testing for combinatorial systems with reproducible seeds. |
 
 > `swe/safe-refactor` is recommended to be used together with `swe/code-smell-audit` (to find what to change) and `swe/testing-discipline` (for the tests the safety loop leans on), but it works standalone and requires neither.
+
+#### UI/UX
+
+| Skill | What it does |
+|---|---|
+| `uiux/ux-principles` | Framework- and style-agnostic UX discipline - the durable heuristics that decide whether an interface *works*: visual hierarchy, chunking, Gestalt grouping, scale/contrast/signal-to-noise, a decision toolkit of UX laws (Hick, Fitts, Miller, Jakob, Doherty, Peak-End, and more), progressive disclosure, forgiveness, full interaction-state cycles, and accessibility as a floor. Applies to any surface - marketing, product, dashboard, form. |
+| `uiux/ui-design` | Anti-slop *visual* UI design for product and marketing surfaces. Reads the brief instead of defaulting to a templated look, then builds around a normalized **style contract**. The aesthetic is pluggable: pick a built-in style (`minimalist`, `brutalist`), describe your own, hand over a reference image, or let it infer one. Enforces style-independent invariants (WCAG contrast, touch targets, reduced-motion, theme/accent/shape locks, real images over fake screenshots) that no style may override, plus an AI-tells catalog and a pre-flight check. |
+
+> `uiux/ux-principles` (does it *work*) and `uiux/ui-design` (how it *looks and feels*) are designed to pair, but each works standalone and requires neither the other nor any framework skill. New visual styles for `ui-design` are pluggable: drop a style pack into `uiux/ui-design/styles/` following `_template.md`.
 
 #### Writing
 
