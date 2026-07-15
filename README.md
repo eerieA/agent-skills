@@ -30,7 +30,10 @@ Skills usable via the `Skill` tool or a `/slash-command`, grouped by domain (`sw
 | `swe/cicd-pipeline` | Platform-agnostic CI/CD deployment pipeline design and review - stage flow, approval and metric gates, choosing a rollout strategy (rolling/blue-green/canary/feature-flag), safe rollback with backward-compatible migrations, health checks that don't lie, and build-once-promote-the-same-artifact. Applies to any runner and any target; ends with a design-review checklist. |
 | `swe/gql-frontend-arch` | Architecture guidance for a frontend web app on a GraphQL backend - module boundaries, state/data-fetching, where logic lives, the API seam, tables, forms, and testing strategy. |
 | `swe/react-best-practices` | Senior-level guidance for building and reviewing production React + TypeScript - component architecture, hooks, state management (Context, Redux Toolkit, TanStack Query), performance, Server Components, testing, and UI/interaction polish. |
+| `swe/safe-refactor` | Language- and framework-agnostic refactoring discipline - restructuring code without changing behavior via the safety loop (small steps, tests green after each, commit rhythm), when NOT to refactor, and a catalog of concrete refactoring operations. |
 | `swe/testing-discipline` | Language- and framework-agnostic testing discipline - test-first / prove-it-with-a-failing-test workflow, what makes a test good, how to size a suite (unit/integration/e2e), and fuzz/property testing for combinatorial systems with reproducible seeds. |
+
+> `swe/safe-refactor` is recommended to be used together with `swe/code-smell-audit` (to find what to change) and `swe/testing-discipline` (for the tests the safety loop leans on), but it works standalone and requires neither.
 
 #### Writing
 
