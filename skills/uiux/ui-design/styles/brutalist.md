@@ -69,9 +69,18 @@ and hold it — never mix light and dark substrates in one interface.
 
 ## 5. Density and Layout
 
-- **The blueprint grid** — strict CSS Grid; elements anchor to tracks and
-  intersections, never float.
-- **Visible compartmentalization** — bordered zones, full-width horizontal rules.
+- **Grid**
+  - **Philosophy** — the *blueprint grid*: strict, rigid CSS Grid; elements anchor
+    to tracks and intersections and never float. The grid is the skeleton, not a
+    suggestion. This rigidity is core to the mechanical character.
+  - **Visibility** — grid is emphatically *shown*: bordered zones, full-width
+    horizontal rules, crosshairs (`+`) at intersections, `gap:1px` dividing lines.
+    The visible structure is the aesthetic — the viewer should read the grid as a
+    diagram.
+  - **Grid-breaks** — the one sanctioned break is the oversized viewport-bleeding
+    numeral/letterform that punches out of the tracks as a focal point. That bleed
+    is deliberate and reads *against* the rigid grid; everything else stays locked.
+    No casual off-axis drift.
 - **Bimodal density** — oscillate between extreme data density (tight monospace
   clusters) and vast calculated negative space framing macro-type. This tension is
   the signature.

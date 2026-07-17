@@ -30,11 +30,16 @@ mode: light | dark | both    # which theme(s) this style commits to
 ---
 ```
 
-## 1. Voice (one paragraph)
+## 1. Voice / Governing Concept (one paragraph)
 
-What is this style *trying to feel like*, and what does it deliberately reject?
-Name the reference points (movements, products, print traditions) as inspiration,
-not imitation. This paragraph is the tie-breaker when a lower-level rule is silent.
+State the **governing concept** first — the one idea this style is built on (a
+metaphor, material, mood, or tension). Then: what is it *trying to feel like*, and
+what does it deliberately reject? Name reference points (movements, products, print
+traditions) as *devices to remix*, not looks to imitate. Every token below must be
+traceable back to this concept; anything that doesn't serve it is cut. This
+paragraph is the soul of the style and the tie-breaker when a lower-level rule is
+silent. See `craft/stylization.md` for how to derive and commit to a concept
+(including the interpretation-not-lookup test).
 
 ## 2. Palette
 
@@ -67,8 +72,20 @@ not imitation. This paragraph is the tie-breaker when a lower-level rule is sile
 
 - **Spacing scale** — the base unit and section rhythm (airy vs. packed).
 - **Content width** — max reading/content width.
-- **Grid character** — symmetric vs. asymmetric; how much layout variance the style
-  wants across sections.
+- **Grid** — the *stylistic* grid traits (not the per-surface mechanics):
+  - **Philosophy** — strict/columnar, modular, asymmetric, broken, or spontaneous.
+    A style's grid discipline is a real personality signal: a rigid columnar grid
+    reads ordered and trustworthy; a broken or off-axis grid reads dynamic and
+    editorial. Pick one on purpose and hold it.
+  - **Visibility** — does this style *show* its grid (visible alignment, rules, or
+    column seams as an aesthetic, à la Swiss) or hide it (grid felt through
+    alignment only)? Showing vs. hiding is itself a stylistic choice.
+  - **Grid-breaks** — how much this style invites deliberate breaks (a bleed, a
+    span, one off-axis element as a focal point) versus keeping every element on the
+    grid. State the rule so breaks read as intentional, not accidental.
+  - *Column counts, gutters, margins, and breakpoints are per-surface mechanics —
+    they live in the skill's responsive step (Step 4), not here. How to reason about
+    grid as composition is in `craft/composition.md`.*
 
 ## 6. Elevation
 

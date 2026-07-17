@@ -55,8 +55,17 @@ imagery, a faint warm radial, a thin pattern) so they don't read as flat or unfi
 - **Spacing** — generous macro-whitespace; large vertical section padding
   (`e.g.` `py-24`–`py-32`). Establish the whitespace rhythm *first*.
 - **Content width** — constrain primary text to `max-w-4xl`–`max-w-5xl`.
-- **Grid** — asymmetric bento grids with mixed cell sizes; internal card padding
-  generous (`24–40px`). Moderate layout variance — calm, not chaotic.
+- **Grid**
+  - **Philosophy** — asymmetric and modular (bento grids with mixed cell sizes),
+    never a rigid uniform matrix. Moderate layout variance — calm, not chaotic.
+  - **Visibility** — grid is *hidden*: felt through alignment and consistent
+    whitespace, never shown as visible rules or column seams. Order comes from
+    breathing room, not drawn structure.
+  - **Grid-breaks** — sparing. An occasional full-bleed image or a single oversized
+    editorial pull-quote may break the column; otherwise everything aligns quietly.
+    A break should feel like a considered emphasis, not a disruption.
+  - *Card padding stays generous (`24–40px`); column/gutter mechanics per surface
+    (Step 4).*
 
 ## 6. Elevation
 

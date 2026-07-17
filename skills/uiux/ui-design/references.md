@@ -29,6 +29,47 @@ Not part of the skill; leave out when copying the skill into a project.
   UX-principle content (hierarchy, feedback, forgiveness, progressive disclosure)
   was routed to `ux-principles` to keep the UX/UI split clean.
 
+## Craft references (`craft/`) — the aesthetic-reasoning layer
+
+Added to give the skill a *generative* half. The original skill was strong at
+anti-slop discipline (what not to do) but thin on how to reason about visual
+aesthetics (what makes a surface actually good and personal). These on-demand files
+are consulted from **Step 1.5**; they sit below the invariants and never override
+them.
+
+- **`craft/stylization.md`** ← **"11 Key Graphic Design Styles"** (Looka)
+  (https://looka.com/blog/graphic-design-styles/) + **"Graphic Design"** (Interaction
+  Design Foundation) (https://ixdf.org/literature/topics/graphic-design). The headline
+  addition. Sources of: the **governing concept** as the seat of personality;
+  **interpretation-not-lookup** as where the "human touch" comes from (added per the
+  user's point that a designer's reading is filtered through lived experience — the
+  operationalized version is "refuse the generic reading, commit to a defensible
+  specific one; two designers should reach two valid souls"); the **movements-as-
+  devices-to-remix** table (Swiss/Bauhaus/Art Deco/Pop/Psychedelic/Postmodern/
+  Brutalism/Flat/Contemporary → devices → feeling); design-is-emotional + Maeda's
+  "design solves a problem, art asks one." Deliberately framed so personality
+  *reinforces* the consistency locks (commit-to-one-premise) rather than fighting
+  them.
+
+- **`craft/color.md`** ← **"Color combinations"** (Figma resource library)
+  (https://www.figma.com/resource-library/color-combinations/).
+  Source of: harmony types (mono/analogous/complementary/split/triadic/tetradic);
+  color properties (hue/value/saturation/temperature) as the tuning knobs that do
+  the hierarchy + mood work; a color-psychology table; the concept→harmony→neutrals→
+  accent build method. Reconciled with the skill's existing one-accent lock (harmony
+  ≠ many competing CTAs) and clamped under the AA floor.
+
+- **`craft/composition.md`** ← **"Golden Rules of Composition"** (MakeUseOf)
+  (https://www.makeuseof.com/graphic-design-rules-of-composition/) + **"Visual
+  Hierarchy in UX: Definition"** (Nielsen Norman Group)
+  (https://www.nngroup.com/articles/visual-hierarchy-ux-definition/). Source of:
+  grid, focal point, layering,
+  texture, negative space, and — per the user's framing — **hierarchy as aesthetic
+  rhythm**, not only information architecture (the intervals between sizes/contrast/
+  space create a cadence). Includes the **squint test** from the NN/g piece. The
+  golden-rules article's "these aren't golden, learn-then-break" stance is honored:
+  grid-break / rule-break framed as deliberate, concept-serving moves.
+
 ## Style packs
 
 - **`minimalist.md`** ← **`minimalist-skill` / `minimalist-ui`** (Leonxlnx/taste-skill)
@@ -43,6 +84,21 @@ Not part of the skill; leave out when copying the skill into a project.
   monospace type architecture, hazard-red single accent, `0` radius, blueprint grid,
   analog degradation / scanlines / halftone, ASCII symbology). Reshaped into the
   style-contract schema; added the AA note about red-on-substrate contrast.
+
+- **`art-deco.md`** — authored as a worked example of the enriched template
+  (governing concept in Voice + the new Grid sub-section). Movement devices drawn
+  from `craft/stylization.md`'s Art Deco row (symmetry, geometric ornament, metallic
+  + jewel tones, vertical emphasis), remixed rather than period-cosplayed. Chosen to
+  exercise the color-rich / decorative / symmetric dimensions the minimalist and
+  brutalist packs leave idle. Added AA note on metallic-on-jewel contrast.
+
+- **`editorial-warm.md`** — authored to demonstrate the skill's headline claim: a
+  *novel, concept-driven* style owing nothing to a named movement, derived from a
+  governing concept ("a well-thumbed printed almanac on a sunny table") with the
+  interpretation-not-lookup step shown explicitly in its Voice. Exercises the
+  warm / soft / human dimension both other packs reject (brutalist's `not_for`
+  literally excludes "consumer-warm"). Not sourced from an external spec — it's an
+  original built from the `craft/` reasoning as a template proof-of-range.
 
 ## Design decisions specific to this skill
 
@@ -60,3 +116,14 @@ Not part of the skill; leave out when copying the skill into a project.
   and intentionally duplicated so either skill stands alone.
 - Kept **standalone**: references to `ux-principles` and any framework/component
   skill are optional ("if the project uses it"), not prerequisites.
+- **Generative layer resolves the anti-slop tension.** The skill's spine works by
+  *banning* (no this, no that, one accent, ≤2 layouts) — which risks producing
+  "not-slop" that's also "nothing." The Step 1.5 governing-concept idea reconciles
+  this: personality comes from *committing harder to one premise and subtracting*,
+  which is the same discipline as the locks, not a license to add. The generative
+  material is deliberately placed **below** the invariants (Step 1.5, before Step 2)
+  so a concept/aesthetic choice can never turn off contrast/targets/reduced-motion.
+- **`craft/` vs `styles/`.** `styles/` = *which* look (concrete token packs);
+  `craft/` = *how to reason about* looks (the transferable method). The concept a
+  `craft/`-guided session produces lands in the `Voice / Governing Concept` slot of
+  a `styles/` contract.

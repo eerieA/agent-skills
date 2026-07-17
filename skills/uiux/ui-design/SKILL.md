@@ -5,7 +5,11 @@ description: >
   portfolios, app screens, forms, and dashboards. Reads the brief and infers the
   right design direction instead of defaulting to a templated look, then builds
   interfaces around a normalized *style contract* (palette, type scale, shape,
-  density, motion, elevation). The aesthetic is PLUGGABLE: pick a built-in style
+  density, motion, elevation). Goes beyond avoiding tells to reasoning about visual
+  aesthetics: a *governing concept* that gives the surface a soul (interpreted from
+  audience and brand, not looked up from clichés), color harmony and psychology,
+  and visual hierarchy as aesthetic rhythm — so the result looks genuinely
+  designed and personal, not just clean. The aesthetic is PLUGGABLE: pick a built-in style
   (minimalist, brutalist), describe your own in text, hand over a reference
   image/ASCII, or let the skill infer one from the brief. Enforces
   style-independent invariants — WCAG contrast, touch targets, reduced-motion,
@@ -29,16 +33,22 @@ gradients, centered hero on dark mesh, three equal feature cards, Inter +
 slate-900) instead of reading the brief and committing to a real direction. This
 skill's whole job is to override that reflex.
 
-Two ideas run through everything below:
+Three ideas run through everything below:
 
 1. **The visual style is pluggable.** The look — palette, typography, shape,
    density, motion — is resolved at the start into a small **style contract**, and
    that contract can come from a named built-in, a text description, a reference
    image, or brief-inference. Minimalist and brutalist are not two different
    skills; they are two settings of this one.
-2. **Invariants sit above the style.** Accessibility, consistency locks, and
-   honesty rules apply *regardless* of the chosen style. A style pack configures
-   the knobs; it may never turn off the guardrails.
+2. **A surface needs a soul, not just correct tokens.** A consistent, accessible,
+   tell-free interface can still be anonymous. Personality comes from a **governing
+   concept** — one interpreted idea every token traces back to — so the result
+   *means something* instead of being a competent mishmash. This is the generative
+   half of the skill (Step 1.5), and it's what stops "not-slop" from settling into
+   "nothing."
+3. **Invariants sit above both.** Accessibility, consistency locks, and honesty
+   rules apply *regardless* of the chosen style or concept. A style pack configures
+   the knobs and the concept aims them; neither may turn off the guardrails.
 
 This skill is written to be stack-agnostic. Code fragments are illustrative
 (`e.g.`) — apply them in whatever framework and styling system the project uses,
@@ -52,6 +62,8 @@ Tailwind, a design system), use its idioms; the principles don't change.
 - Choosing palette, typography, layout, spacing, motion, or component styling.
 - "Make it look {minimalist, brutalist, premium, editorial, Linear-clean, …}" — or
   "make it not look AI-generated."
+- "Make it look beautiful / pretty / have personality / feel less generic / have a
+  point of view" — the generative aesthetic ask, not just the avoid-tells ask.
 - Redesigning an existing interface.
 
 **When to defer instead:**
@@ -130,14 +142,101 @@ Whatever the source, normalize to these tokens (full schema and authoring guide 
 Once resolved, the contract is **locked for the whole surface**. Every section
 reads the same tokens (see the consistency locks below).
 
+> The contract tells you *what the tokens are*; it does not, by itself, make them
+> *good together* or give the surface a point of view. That is Step 1.5 — do it
+> before or while filling the contract, not after. Resolving a contract without a
+> governing concept is how you get a consistent-but-soulless surface.
+
 ### Built-in styles
 
 - `styles/minimalist.md` — warm monochrome, editorial, flat, generous whitespace,
   typographic contrast, near-zero shadow.
 - `styles/brutalist.md` — raw Swiss-industrial *or* tactical-terminal; rigid grids,
   extreme type-scale contrast, utilitarian color, no radius, analog texture.
+- `styles/art-deco.md` — machine-age glamour; geometric ornament on a symmetric
+  vertical grid, jewel-dark palette with one metallic accent, high-contrast display.
+- `styles/editorial-warm.md` — a *novel, concept-driven* style (no named movement):
+  the calm of a printed almanac — warm paper, earthy ink, reading serif, unhurried
+  pacing. Doubles as a worked example of deriving a soul from a governing concept.
 - `styles/_template.md` — the empty contract schema. Copy it to author a new style,
   or to capture a described/image-derived style in a consistent shape.
+
+## Step 1.5 — Aesthetic Reasoning (Make It Good, Not Just Correct)
+
+Steps 2–4 keep a surface from being *bad* — accessible, consistent, tell-free. This
+step is what makes it *good*: authored, harmonious, and possessed of a point of
+view. Skipping it is how you get output that passes every check and still looks
+generated. Work through the four moves below; each has a companion file in `craft/`
+with the depth — load it when you need more than the summary.
+
+### 1. Name the governing concept (this is where personality comes from)
+
+Before choosing tokens, name the **one idea the surface is built on** — a metaphor
+("a field notebook"), a material ("hot-rolled steel"), a mood ("late-night calm"),
+or a tension ("clinical precision vs. handmade warmth"). Every token — palette,
+type, shape, density, motion, imagery — must be traceable back to it, and anything
+that doesn't serve it gets **cut**. Personality is *subtraction in service of one
+idea*, not accumulation of distinctive elements. A style has a soul because one
+premise is committed to completely.
+
+**Where the soul actually comes from: interpretation, not lookup.** The generic
+association — "banking → blue → trust", "kids → rounded + rainbow", "luxury → black
++ gold" — is correct and dead, and it's where slop lives, because it's the answer
+everyone (and every model) reaches for by default. Push past the first association
+to a *specific, committed reading* of who this audience is in a real moment and
+what this brand actually feels like, and let *that* reading drive the concept. A
+human designer's reading carries genuine "human touch" because it's filtered through
+lived experience and a point of view; you produce the same effect by doing what that
+enables — refusing the generic reading and committing to a defensible specific one.
+
+> **Self-test:** if your concept is the one anyone would land on, it's a lookup, not
+> an interpretation. Two designers reading the same brief should be able to reach
+> two different, equally valid souls. Anchor the reading in the *audience as a person
+> in a moment* and the *brand's actual values* (Step 0), interpreted into visual
+> terms — not the demographic label or the category cliché.
+
+The concept and the consistency locks (Step 2) are the same discipline: the locks
+make a surface *coherent*; the concept makes it *mean something*. Write the concept
+first, then the locks enforce it. **Depth:** `craft/stylization.md` — including how
+to treat named movements (Bauhaus, Swiss, Art Deco, …) as a vocabulary of *devices
+to remix* into novel coherent styles, never presets to clone.
+
+### 2. Color as a system, not an accent
+
+Don't pick a nice accent and call it a palette. Choose a **harmony relationship**
+that expresses the concept (monochromatic/analogous = calm+singular;
+complementary/triadic = energetic+contrasting), then tune with **color properties** —
+value and saturation do most of the hierarchy work, temperature sets the mood —
+and justify the hue against **psychology** that fits the concept. Reserve the highest
+saturation for the one thing that matters most; a page where everything is saturated
+has no hierarchy. All of this lives *inside* the AA floor (Step 2) — a pairing that
+fails contrast fails, period. **Depth:** `craft/color.md`.
+
+### 3. Hierarchy as rhythm, not just findability
+
+Visual hierarchy makes the important thing findable (a UX job) *and* creates an
+aesthetic **cadence** the eye finds pleasing (a UI job) — same act done well. Build
+it from ~3 scale sizes, ~3 contrast levels, and grouping by space (tight *within* a
+group, loose *between*), all stepped on a consistent ratio so the *intervals* are
+rhythmic. **Amplitude is a concept choice:** decisive scale/contrast/space jumps
+read bold; gentle ones read calm; timid medium-everything reads as slop. Give the
+eye one clear focal point, and treat negative space as an active material, not
+leftover. Verify with the **squint test** — blur the layout ~5–10px; one element
+should dominate, groups should read as blocks, rhythm should be even. **Depth:**
+`craft/composition.md`.
+
+### 4. Deriving the design language from fuzzy input
+
+When the brief is colloquial words, an article, an image, or market/audience
+context rather than a named style, that *is* the raw material for the concept.
+Interpret it (per move 1) into: a governing concept → a palette harmony → a type
+and shape character → a density and motion band. This is a lightweight version of
+how a design system is derived — a small, project-specific set of visual decisions
+that everything is then designed against. It feeds directly into the Step 1 style
+resolver (source 2 "user-described" and source 4 "infer from brief"): the concept
+goes in the contract's **Voice** slot, and every other token is chosen to serve it.
+Echo the derived concept + contract back to the user for confirmation before
+building.
 
 ## Step 2 — The Style-Independent Invariants
 
@@ -262,10 +361,13 @@ replacement (last resort).
 Self-sufficient; the references below are optional and compose only if present.
 
 - **`ux-principles`** (if the project uses it) — decides whether the design *works*:
-  hierarchy logic, flows, cognitive load, findability, and the accessibility
-  rationale. This skill assumes that layer is sound and makes it *look and feel*
-  right. Settle structure and states there; render them here. The AA-contrast and
-  reduced-motion invariants are shared.
+  hierarchy *logic* (what's most important and why), flows, cognitive load,
+  findability, and the accessibility rationale. This skill assumes that layer is
+  sound and makes it *look and feel* right — including hierarchy as *aesthetic
+  rhythm* (Step 1.5 / `craft/composition.md`): same hierarchy, judged for cadence
+  and pleasingness rather than task success. Settle structure and states there;
+  render and tune the rhythm here. The AA-contrast and reduced-motion invariants are
+  shared.
 - **A framework/component skill** (`e.g.` a React or design-system skill, if the
   project uses one) — owns the implementation idioms (component architecture, state,
   RSC boundaries). This skill's contract and invariants ride on top of whatever that
@@ -279,6 +381,9 @@ Run before delivering. If a box can't be honestly ticked, it isn't done.
 - [ ] **Design Read** declared (surface / audience / vibe / style source)
 - [ ] **Style contract** resolved from a real source (built-in, described, image, or
       declared inference) — *not* a silent AI default
+- [ ] **Governing concept** named and *interpreted* (not a category lookup); every
+      token traces to it; off-concept elements cut. Palette is a chosen harmony, not
+      a bolted-on accent; hierarchy has decisive rhythm (passes the squint test)
 - [ ] **Locks** held: one theme, one accent, one shape system, one type scale, across
       all sections
 - [ ] **Contrast** AA on every button, input, placeholder, focus ring, label
