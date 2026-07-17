@@ -1,4 +1,4 @@
-# references — ui-design
+# references — ui-taste
 
 Author-only memory-jog for what this skill (and its style packs) were built on.
 Not part of the skill; leave out when copying the skill into a project.

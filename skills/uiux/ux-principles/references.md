@@ -13,7 +13,7 @@ leave out when copying the skill into a project.
   applicable framing of the perceptual principles, which is why it anchors that part.
 
 - **"The 21 most influential UX laws" / Laws of UX** (Maze, curating Jon Yablonski)
-  (https://maze.co/collections/ux-ui-design/ux-laws/)
+  (https://maze.co/collections/ux-ui-taste/ux-laws/)
   — source of Part 2 (the UX-law decision toolkit): Jakob, Aesthetic-Usability,
   Doherty, Fitts, Hick, Miller, goal-gradient, the Gestalt grouping laws (common
   region, proximity, uniform connectedness, Prägnanz, similarity), Occam, Pareto,
@@ -35,14 +35,14 @@ leave out when copying the skill into a project.
   feedback, forgiveness/error-recovery, consistency, full interaction-state cycles,
   navigation legibility) and the accessibility floor in Part 4. Its *visual*-design
   and stack-specific material (color/type/motion craft, shadcn/Tailwind/Phosphor
-  defaults, MOTION-SPEC.md, RESPONSIVE-DESIGN.md) was routed to `ui-design` instead,
+  defaults, MOTION-SPEC.md, RESPONSIVE-DESIGN.md) was routed to `ui-taste` instead,
   keeping this skill style-agnostic.
 
 ## Design decisions specific to this skill
 
 - **UX / UI split.** This skill deliberately owns only *does it work* — hierarchy,
   flow, cognitive load, findability, accessibility rationale. All *how it looks*
-  content (palette, typography, motion feel, anti-slop) lives in `ui-design`. The
+  content (palette, typography, motion feel, anti-slop) lives in `ui-taste`. The
   split lets this skill stay framework- and style-agnostic and apply to dashboards
   and forms, not just marketing surfaces.
 - **Laws as a toolkit, not a checklist.** The 21 laws are framed as situational
@@ -50,6 +50,6 @@ leave out when copying the skill into a project.
   everywhere, to avoid cargo-culting.
 - **Accessibility as a floor.** Stated as hard minimums independent of style, with
   the AA-contrast and reduced-motion invariants intentionally duplicated into
-  `ui-design` so either skill enforces them standalone.
-- Kept **standalone**: references to `ui-design` and `testing-discipline` are
+  `ui-taste` so either skill enforces them standalone.
+- Kept **standalone**: references to `ui-taste` and `testing-discipline` are
   optional ("if the project uses it"), not prerequisites.

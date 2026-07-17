@@ -1,24 +1,22 @@
 ---
-name: ui-design
+name: ui-taste
 description: >
-  Anti-slop visual UI design for product and marketing surfaces — landing pages,
-  portfolios, app screens, forms, and dashboards. Reads the brief and infers the
-  right design direction instead of defaulting to a templated look, then builds
-  interfaces around a normalized *style contract* (palette, type scale, shape,
-  density, motion, elevation). Goes beyond avoiding tells to reasoning about visual
-  aesthetics: a *governing concept* that gives the surface a soul (interpreted from
-  audience and brand, not looked up from clichés), color harmony and psychology,
-  and visual hierarchy as aesthetic rhythm — so the result looks genuinely
-  designed and personal, not just clean. The aesthetic is PLUGGABLE: pick a built-in style
-  (minimalist, brutalist), describe your own in text, hand over a reference
-  image/ASCII, or let the skill infer one from the brief. Enforces
-  style-independent invariants — WCAG contrast, touch targets, reduced-motion,
-  one-theme/one-accent/one-shape locks, real images over fake screenshots — that
-  no style may override, plus a catalog of AI "tells" to avoid and a pre-flight
-  check. Use when asked to build, style, or redesign an interface, choose colors
-  / typography / layout / motion, or "make it look {minimalist, brutalist,
-  premium, editorial, …}" and not generic. Defers dense enterprise UI to official
-  design systems. Self-contained; composes with a UX or React skill if present.
+  Anti-slop visual UI design for product and marketing surfaces (landing pages,
+  portfolios, app screens, forms, dashboards). Reads the brief instead of defaulting
+  to a templated look, then builds around a normalized *style contract* (palette,
+  type, shape, density, motion, elevation). Beyond avoiding tells, it reasons about
+  aesthetics: a *governing concept* that gives the surface a soul, color harmony,
+  and hierarchy as visual rhythm, so the result looks genuinely designed, not just
+  clean. The aesthetic is PLUGGABLE: a built-in style (minimalist, brutalist,
+  art-deco, editorial-warm), your own text description, a reference image, or one
+  inferred from the brief. Enforces invariants no style may override (WCAG contrast,
+  touch targets, reduced-motion, one-theme/accent/shape locks, real images over fake
+  screenshots), plus an AI-tells catalog and pre-flight check. Use to build, style,
+  or redesign an interface, choose colors/type/layout/motion, or "make it look
+  {minimalist, premium, editorial, ...}" and not generic. Defers dense enterprise UI
+  to official design systems. Pairs naturally with `ui-style-guide` (which
+  systematizes the resulting language into a documented style guide / design system);
+  composes with `ux-principles` or a framework skill if present.
 metadata:
   domain: uiux
   scope: implementation
@@ -368,6 +366,14 @@ Self-sufficient; the references below are optional and compose only if present.
   and pleasingness rather than task success. Settle structure and states there;
   render and tune the rhythm here. The AA-contrast and reduced-motion invariants are
   shared.
+- **`ui-style-guide`** (if the project uses it) — takes the resolved style contract as
+  *input* and systematizes it into a shareable style guide / design system: tokens
+  named by role, a component inventory covering every state, grid/spacing/icon
+  specimens, indexed. Directional pipeline: *this skill decides the visual language
+  → `ui-style-guide` documents and componentizes it → screens are built against the
+  guide.* When the ask is "make a style guide" / "build a design system" / "define
+  our tokens" rather than "style this surface," that skill leads and this one feeds
+  it the language.
 - **A framework/component skill** (`e.g.` a React or design-system skill, if the
   project uses one) — owns the implementation idioms (component architecture, state,
   RSC boundaries). This skill's contract and invariants ride on top of whatever that

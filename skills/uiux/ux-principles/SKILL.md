@@ -218,7 +218,7 @@ This skill is self-sufficient — it needs no other skill present. References be
 are optional: when a project *also* uses the named skill, the two compose; when it
 doesn't, ignore the reference and proceed with this skill alone.
 
-- **`ui-design`** (if the project uses it) — owns the *visual* layer: brief-read,
+- **`ui-taste`** (if the project uses it) — owns the *visual* layer: brief-read,
   aesthetic style (pluggable), palette/typography/motion craft, and the anti-slop
   discipline. This skill decides whether a design *works*; that one decides how it
   *looks and feels*. They pair naturally: settle hierarchy, flow, and states here;

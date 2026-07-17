@@ -1,6 +1,6 @@
 # Style Contract Template
 
-A **style pack** fills in this schema to give the `ui-design` skill a concrete
+A **style pack** fills in this schema to give the `ui-taste` skill a concrete
 aesthetic. The skill's *invariants* (WCAG contrast, touch targets, reduced motion,
 the consistency locks, image/logo honesty) always apply on top — a style pack sets
 values *within* those constraints and may never relax them.
