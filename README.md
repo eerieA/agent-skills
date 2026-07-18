@@ -6,7 +6,7 @@ Personal collection of reusable [Claude Code](https://claude.com/claude-code) as
 
 - [agent-skills](#agent-skills)
     - [Contents](#contents)
-        - [`CLAUDE.starter.md`](#claudestartermd)
+        - [`CLAUDE.starter.*.md`](#claudestartermd)
         - [`skills/`](#skills)
             - [Software](#software)
             - [UI/UX](#uiux)
@@ -17,8 +17,11 @@ Personal collection of reusable [Claude Code](https://claude.com/claude-code) as
 
 ## Contents
 
-### `CLAUDE.starter.md`
-A baseline `CLAUDE.md` for a new project. It's a starter, not a template: copy it to a project root as `CLAUDE.md`, then prune. Bracketed `[...]` slots get filled or deleted; the default working agreement (rules 1–5) is project-agnostic and meant to stay. When in doubt, delete.
+### `CLAUDE.starter.*.md`
+Baseline `CLAUDE.md` files to copy into a project root, then prune. They're starters, not templates: fill or delete the bracketed `[...]` / `{{PLACEHOLDER}}` slots, keep the project-agnostic defaults, and when in doubt, delete.
+
+- **`CLAUDE.starter.swe.md`** — for a coding/SWE project. Sets a default working agreement (rules 1–5 are project-agnostic and meant to stay), a git workflow, and slots for project-specific conventions.
+- **`CLAUDE.starter.writing.md`** — for a writing project. Sets the agent up as an honest critic/collaborator and keeps its own prose free of AI tells; the proactive counterpart to the `writing/ai-tell-audit` skill.
 
 ### `skills/`
 Skills usable via the `Skill` tool or a `/slash-command`, grouped by domain (`swe/` for software work, `uiux/` for interface design; future domains get their own folder).
@@ -54,9 +57,10 @@ Skills usable via the `Skill` tool or a `/slash-command`, grouped by domain (`sw
 | `writing/world-audit` | Audit an existing fiction world - scans your notes, bible, or draft for missing rules, contradictions, unbounded magic/tech, infodump risk, and thin sensory detail, then fixes what you approve. Invoke with `/world-audit`. |
 | `writing/character-building` | Interactive fiction character-building - interviews you to build one character in depth or a whole cast web, centering the want-vs-need contradiction, the ghost and lie, and revelation through choice under pressure. Invoke with `/character-building`. |
 | `writing/character-audit` | Audit existing fiction characters - scans your profiles, notes, or draft for want-without-need, flat/too-perfect/too-evil characters, obstacle-only opponents, dumped characterization, and dialogue without subtext, then fixes what you approve. Invoke with `/character-audit`. |
+| `writing/ai-tell-audit` | Audit prose for AI writing tells - detects and advises fixes for puffery, overused AI vocabulary, negative parallelism, superficial -ing tails, em dashes, chatbot residue, and citation hallucination, severity-ranked and cluster-gated to avoid over-correcting. Detect-and-advise, never a silent rewrite; register-aware; a light script keeps its phrase lists synced with Wikipedia. Invoke with `/ai-tell-audit`. |
 
 ## Usage
 
-- **Starter:** copy `CLAUDE.starter.md` → `<project>/CLAUDE.md`, then adapt and delete the leading comment block.
+- **Starter:** copy `CLAUDE.starter.swe.md` (coding/SWE) or `CLAUDE.starter.writing.md` (writing) → `<project>/CLAUDE.md`, then adapt and delete the leading comment block.
 - **Skills:** copy the individual skill subfolder into a project's `.claude/skills/` - e.g. `skills/swe/code-smell-audit/` → `<project>/.claude/skills/code-smell-audit/` - then invoke by name. The `swe/` and `writing/` groupings are for organizing this repo; they aren't part of the invocation path.
 - **`references.md` is author-only.** When a skill folder contains a `references.md`, it's a memory-jog recording what the skill was built on - not part of the skill. Leave it out when copying a skill into a project.

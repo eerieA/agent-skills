@@ -1,5 +1,5 @@
 <!--
-  CLAUDE.starter.md — a baseline CLAUDE.md for a new coding/SWE project.
+  CLAUDE.starter.swe.md — a baseline CLAUDE.md for a new coding/SWE project.
 
   HOW TO USE: Copy this to a project's root as CLAUDE.md, then PRUNE.
   - Project-agnostic and meant to stay: the Communication & safety block,
