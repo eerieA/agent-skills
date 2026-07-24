@@ -297,6 +297,44 @@ the `react-best-practices` skill.)
 
 ---
 
+### 12. Lookup-miss conflated with "not loaded yet" (High)
+
+A derived value is computed by looking a key up in a map/dict built from an async
+source (a second query, a join, a cache). The lookup's "not found" result (`undefined`/
+`None`/absent key) is used as the *only* signal for "the source hasn't loaded yet" —
+but a real, resolved-empty answer (the key legitimately has zero/no matches) produces
+the exact same "not found" result. The two states are indistinguishable at the read
+site, so a genuinely-resolved-to-nothing case is stuck forever looking like it's still
+loading (or, in the opposite direction, treated as data before the source has arrived).
+
+The tell: the "loading" check and the "value" check are the same expression — there is
+no separate signal for "has the source itself resolved."
+
+```ts
+// countsByBuildingId is a Map built once its source query resolves. A building with
+// zero matches (never inserted into the map) reads as `undefined` from `.get()` —
+// identical to "map hasn't loaded yet." Its skeleton/spinner never clears.
+switchCount: countsByBuildingId?.get(building.id),
+```
+
+Look for:
+- `map.get(key)` / `dict.get(key)` / `record[key]` used directly as a "pending" or
+  "loaded" signal, where the map is itself the product of an async fetch
+- A `pending`/`isLoading` predicate defined as `value === undefined` where `value` comes
+  from a lookup that can also legitimately miss
+- Client-side joins (React Query, GraphQL resolvers assembled in multiple round trips)
+  where a joined field defaults via `map.get(id) ?? fallback` unconditionally, instead of
+  branching on whether the *source itself* has arrived
+- Caches/memoized maps where "key absent" is overloaded to mean both "not computed yet"
+  and "computed, no result"
+
+**Fix pattern:** gate on the source's own loaded/undefined state first (`if (!map) return
+undefined /* still loading */`), and only fall back to a real default (`?? 0`, `?? null`)
+once the source has resolved. The two states — "source not ready" and "source ready, no
+match" — must be checked independently, never inferred from the same `.get()` call.
+
+---
+
 ## Severity definitions
 
 | Severity | Meaning |
