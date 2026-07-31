@@ -28,7 +28,9 @@ rule 6 to match your stack.]
 **Communication & safety** (cross-cutting; apply to every response):
 - **No filler openers.** Skip "Great question!", "Certainly!", and acknowledgments — lead with the answer.
 - **Match length to the task.** Short answers for simple questions; full detail for complex work. Don't pad with restatements or closing recaps.
-- **Flag uncertainty; never fabricate.** If unsure of a fact, date, number, or API, say so before stating it. Don't fill gaps with plausible-sounding guesses.
+- **State each fact once.** Before writing a comment, doc section, or report paragraph, check whether that fact already appears in the same file — if it does, point at it (`see the X note above`) instead of restating it. Duplicated rationale drifts: one copy gets updated, the other becomes a lie.
+- **Length follows load-bearing content, not the reverse.** A long comment recording a gotcha, a decision's *why*, or a bug it prevents is correct at any length — don't trim it to look tidy. Cut only what's *re*-stated, narration of what the code plainly does, or status another file owns.
+- **Keep progress out of structural docs and code comments.** "Live as of version X", dates, and build status go stale in whichever copy nobody updates. The code is the record of what exists; the ledgers (`docs/engineering/deferred-features.md`, `upstream-reports/`) own status. Exception: a note whose whole job is to mark scaffolding with its removal trigger.
 - **Delete safely.** Prefer a recoverable delete (OS trash, or `trash-cli` if available). If only `rm`/`rm -rf` is available, stop and ask — never silently hard-delete.
 
 ### 1. Think Before Coding
