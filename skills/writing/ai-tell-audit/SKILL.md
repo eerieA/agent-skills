@@ -2,12 +2,18 @@
 name: ai-tell-audit
 description: >
   Audit prose for AI writing tells and advise fixes, without rewriting behind the
-  writer's back. Point it at a draft, doc, README, memory file, UI copy, or any
-  paste; it scans for the giveaways that mark text as machine-generated: puffery and
+  writer's back. Works across registers - essays, fiction, and marketing copy as well
+  as technical and reference prose (engineering docs, design docs, READMEs, PR
+  descriptions, code comments, memory files, UI copy, replies to colleagues); the
+  register sets which tells apply, and the default when unstated is technical. Point
+  it at a draft, doc, diff, or any paste; it scans for the giveaways that mark text
+  as machine-generated: puffery and
   significance inflation, promotional tone, formulaic structures (rule of three,
   "not X but Y", "Despite challenges"), stylistic quirks (elegant variation, false
   ranges, copula avoidance), formatting tells (em dashes, mechanical boldface, title
-  case), and voiceless "clean but soulless" prose. Tiered by severity with a strong
+  case), over-explanation (defending a point already made, rating your own material,
+  justifying a recommendation against its alternative, graded praise in a reply to a
+  colleague), and voiceless "clean but soulless" prose. Tiered by severity with a strong
   false-positives guard so it flags clusters, not lone coincidences, and never
   flattens legitimate human writing. Produces a prioritized findings table, then
   fixes only what the writer approves. Invoke with /ai-tell-audit.
@@ -55,6 +61,14 @@ The tier decides *when* you flag, not just how loud.
 When in doubt on a Medium item, **don't flag it** - note it silently and see whether
 the cluster forms. A lone em dash, one "however", one curly quote: not a finding.
 
+**In technical prose with no vocabulary problem, look at the E group first.** A doc can
+be free of every wording and formatting tell and still read as machine-written because
+no claim is allowed to stand alone: every point gets a defending clause, every
+recommendation an argument against its alternative, every source a grade. That is
+usually the largest available cut, and the one the writer feels most immediately. It is
+also the easiest to overdo - `false-positives.md`'s *load-bearing clauses* guard is
+mandatory reading before acting on an E finding.
+
 **Exception - citations.** Citation hallucination (`craft/bad-citation.md`) inverts
 the cluster rule: a *single* malformed reference (checksum-invalid ISBN, wrong-paper
 DOI, author dead at the cited date) is High evidence standalone, because humans
@@ -65,7 +79,7 @@ almost never fabricate one. Flag those on first hit.
 1. Read the text once for register and overall voice before hunting patterns.
 2. Scan against the catalogs in `craft/`:
    - `craft/patterns.md` - the tell catalog, grouped **wording / structure / voice &
-     tone / formatting**, each with before → after.
+     tone / formatting / over-explanation**, each with before → after.
    - `craft/bad-citation.md` - citation hallucination (invalid ISBN/DOI, wrong-paper
      DOI, page-less cites, impossible author/date). A *verification* tell, not a
      surface one, and the one place the cluster rule inverts - see below. Consult

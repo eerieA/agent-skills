@@ -79,7 +79,58 @@ Cluster: sycophancy, collaborative artifact, signposting.
 
 ---
 
-## 5. A cluster that should be LEFT ALONE
+## 5. Over-explained engineering doc → same content, half the clauses
+
+The E-group cluster, in a planning doc for a fictional web client. Note what is *not*
+wrong here: no puffery, no vocabulary tells, no promotional tone. Every sentence is
+accurate and the technical content is good. It still reads as machine-written, because
+no claim is allowed to stand by itself.
+
+**Before**
+
+> `src/auth/user.ts`. DESIGN-07 pins the break site exactly right: `getUser()` does
+> `TIERS.includes(id) ? id : 'owner'`, so once `id` is a person that test is false and
+> **every user falls through to `owner`**. That is a display bug rather than a data-loss
+> bug, since `permissions.ts` is explicit the client is not a security boundary - and it
+> is what makes the `/current-user` call mandatory.
+>
+> **Decision to make: what renders before `/current-user` resolves.** Rendering the shell
+> against a not-yet-known permission set flashes controls off then on; blocking on a
+> splash costs a gate we don't have today. **Recommend blocking** - one round-trip on an
+> internal tool, and it avoids showing controls the user may not have.
+>
+> Two viable shapes; pick one when building:
+
+**After**
+
+> `src/auth/user.ts`. DESIGN-07 pins the break site: `getUser()` does
+> `TIERS.includes(id) ? id : 'owner'`, so once `id` is a person that test is false and
+> **every user falls through to `owner`**.
+>
+> **Decision to make: what renders before `/current-user` resolves.** Rendering the shell
+> against a not-yet-known permission set flashes controls off then on. Recommend
+> blocking: one round-trip on an internal tool, and it avoids showing controls the user
+> may not have.
+>
+> Two options:
+
+What came out, and why each was safe:
+- *exactly right* (E3) - rating the source; "pins the break site" already credits it.
+- The whole *display bug rather than a data-loss bug* sentence (E2) - answers an objection
+  nobody made. The severity claim it defends was never disputed.
+- *blocking on a splash costs a gate we don't have today* (E1) - arguing the rejected
+  option's merits after recommending the other one.
+- *viable ... pick one when building* (E1) - narrating that a choice is a choice.
+
+What stayed, deliberately: the `TIERS.includes(id) ? id : 'owner'` mechanism, the
+consequence (*every user falls through to `owner`*), and the reason for the
+recommendation (*one round-trip*). Those are the guard and the consequence from the
+`false-positives.md` technical keep-column - cutting them would remove the point of the
+paragraph.
+
+---
+
+## 6. A cluster that should be LEFT ALONE
 
 Not every trip through the catalog is a finding. This human paragraph trips *several*
 patterns and is still fine:

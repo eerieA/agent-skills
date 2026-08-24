@@ -222,6 +222,24 @@ you're absolutely right
 - Before: *Great question! You're absolutely right that this is complex.*
 - After: (drop; state the point.)
 
+**Graded praise in correspondence - Medium.** The list above catches chatbot residue,
+but the commoner case in real work is a *review or reply to a colleague* that opens
+with a paragraph of escalating approval before the substance. Warmth toward a person
+is legitimate and should survive; the tell is praise that is **multi-clause, graded,
+and pre-emptive** - complimenting several things at increasing strength, then softening
+the criticism before making it.
+
+- Before: *Both proposals read well from the consumer side, and the two decisions that
+  most affect us are the right ones: [X], and [Y]. Moving validation server-side is a
+  straightforward win we're glad to absorb. Four notes, one of which we think is a
+  genuine gap.*
+- After: *The two decisions that most affect our client: [X], and [Y]. Great decisions.
+  There just might be one gap.*
+
+Compliment once, briefly, then get to the point. Also cut the pre-softened framing of
+the criticism (*one of which we think is a genuine gap* → *There might be one gap*) -
+hedging a concern twice reads as fear of raising it.
+
 ### C4. Conversational fake-candor openers - Medium
 A theatrical pause-and-reveal before an ordinary claim.
 
@@ -298,3 +316,142 @@ central figure... the hero*). Pick one term and reuse it.
 *data-driven, cross-functional, high-quality, real-time* hyphenated uniformly, even
 in predicate position. Keep the hyphen when attributive (*a high-quality report*),
 drop it after the noun (*the report is high quality*).
+
+---
+
+## E. Over-explanation
+
+The model's habit of never letting a claim stand alone. Each of these adds a clause
+that defends, rates, or softens a point already made. Individually they look like
+diligence; together they are the single biggest source of bloat in AI-written
+technical docs, and the most reliable tell in prose that has no vocabulary problems
+at all.
+
+The habit is not confined to technical prose. In fiction and essays it surfaces as
+narration that will not trust the scene - the beat lands, then a clause explains what
+it meant. Same reflex, different costume, and there it costs implication rather than
+lines.
+
+**Register scope.** E1, E2, E3, and E5 apply in **any** register; each carries a
+creative-register example below. E4 is **technical-only** - fiction has no rules with
+rationales attached.
+
+These are **Medium** and cluster-judged. Read the *load-bearing clauses* guard in
+`false-positives.md` before cutting any clause under this group. The test is **whose
+objection the clause answers.** A reader who might otherwise go wrong - keep it. A
+critic in the writer's head - cut it. In expressive registers the keep-test shifts:
+ask whether the clause does **tonal or characterizing** work rather than whether it
+prevents a mistake. A narrator who hedges may be hedging *in character*.
+
+### E1. Defending a choice already made - Medium
+Committing to something, then arguing the rejected alternative's merits so no one can
+object. The choice plus one reason is complete.
+
+In technical prose this is a recommendation followed by a defence of the option it
+turned down. **The creative-register form is the same move without the vocabulary of
+recommendations:** a character decides, or the narrator frames a decision, and the
+prose then litigates the road not taken. There is no "recommendation" and no "reader
+who might object" - but there is a writer who does not trust the choice to stand.
+
+- Before: *Rendering the shell against a not-yet-known ability flashes affordances off
+  then on; blocking on a splash costs a gate we don't have today. **Recommend
+  blocking** - one round-trip on an internal tool.*
+- After: *Rendering the shell against a not-yet-known ability flashes affordances off
+  then on. Recommend blocking: one round-trip on an internal tool.*
+- Before: *She took the coast road. The inland route would have been faster, and in
+  better weather she might have chosen it, but the coast road was the one she knew.*
+- After: *She took the coast road. It was the one she knew.*
+
+Also: *Two viable shapes; pick one when building* → *Two options.* Do not narrate that
+a choice is a choice - in either register.
+
+### E2. The reassurance clause - Medium
+A trailing qualifier that pre-empts an objection nobody raised. Often signalled by
+*rather than*, *though*, *but*, *not X*, appended after the point is complete.
+
+In expressive registers this is the commonest E tell and the most damaging, because
+the clause usually explains the thing the scene just did. The beat lands, then the
+narration turns around and glosses it. Cutting restores the implication.
+
+- Before: *That is a display bug rather than a data-loss bug, since `permissions.ts` is
+  explicit the client is not a security boundary - and it is what makes the
+  `/current-user` call mandatory.*
+- After: (drop entirely; the preceding sentence stated the effect.)
+- Before: *a small loss, but one we'd feel during demos.*
+- After: *a small loss.*
+- Before: *He put the photograph back in the drawer, though not because he had stopped
+  wanting to look at it.*
+- After: *He put the photograph back in the drawer.*
+- Before: *She said nothing, which was not the same as agreeing.*
+- After: *She said nothing.*
+
+**Creative-register guard.** A trailing qualifier that *reverses* or complicates the
+sentence is doing work - keep it. The tell is the qualifier that merely reassures the
+reader they read correctly. *"She said nothing, and went on drying the plate"* adds;
+*"She said nothing, which was not the same as agreeing"* explains.
+
+### E3. Rating your own material - Medium
+Grading the thing being described instead of naming it. The model praises its source,
+its own ordering, and its own proposals.
+
+The creative-register form is **asserting significance instead of earning it**: the
+narration tells you a moment was rare, telling, or unforgettable, which is the writer
+grading their own scene. If the moment works, the label is redundant; if it does not,
+the label will not save it.
+
+Watch (technical): *exactly right, pins it precisely, the natural fit, genuinely new,
+worth more than, and rightly so, correctly notes* - and headings that judge (*the item
+X misses*, *staler still*).
+
+Watch (expressive): *it was a rare thing, something she would never forget, the moment
+that changed everything, more telling than anything he could have said, in a way that
+mattered.*
+
+- Before: *DESIGN-07 pins the break site **exactly right**.*
+- After: *DESIGN-07 pins the break site.*
+- Before: *`sessionStorage` **is the natural fit** - per-tab and dies with the tab.*
+- After: *`sessionStorage` looks right here: per-tab, and dies with the tab.*
+- Before: *Ordered **so each builds on the last**.*
+- After: *Ordered by dependence sequence.*
+- Before: *He laughed, and it was the first time she had heard him do it - **a rare
+  thing, and one she would remember for years.***
+- After: *He laughed. She had not heard him do it before.*
+- Before: *The kitchen still smelled of woodsmoke, **a detail more telling than
+  anything he might have said**.*
+- After: *The kitchen still smelled of woodsmoke.*
+
+**Distinguish from a narrator with a real opinion.** A first-person or close-third
+narrator *is allowed to judge* - that is characterization, and cutting it flattens
+voice. The tell is judgment in the authorial seat, praising the material rather than
+revealing the person seeing it. *"It was the best meal of my life"* from a narrator
+is voice; *"it was a genuinely remarkable meal"* from nowhere is a grade.
+
+### E4. Explaining the rule after stating it - Medium, technical registers only
+A rule, then a sentence on why the rule is the rule. Distinct from recording *why a
+decision was made* (which is often load-bearing - see the guard above): this is
+reasoning about the instruction's own correctness. Does not apply to fiction or
+personal essays, which have no instructions to justify.
+
+- Before: *⚠️ **Not "DESIGN-08 approved" - `token_mint.py` actually deleted.** Between
+  those two moments the endpoint is still live, so a doc saying it's gone would be
+  wrong in the dangerous direction: it reads as "that doesn't exist" while someone may
+  still be using it.*
+- After: *⚠️ **`token_mint.py` actually deleted from the gateway,** not the design doc
+  being officially settled.*
+
+### E5. Emphasis quoting and scare-italics - Low
+Italicising or quoting a phrase already carried by the sentence. The emphasis marks
+tell the reader that a word matters instead of putting it where it lands. Flag only
+alongside other E-group findings.
+
+- Before: *scopes the client at *two files plus one header line*.*
+- After: *scopes the client at two files plus one header line.*
+- Before: *She had not been invited. She had *arrived*.*
+- After: *She had not been invited. She had arrived.*
+- Before: *It was, in a sense, a kind of "homecoming."*
+- After: *It was a homecoming.*
+
+**Keep italics that do a job:** titles, foreign terms, a genuine stress that changes
+the reading (*I* never said that / I never said *that*), and interior monologue set in
+italics by convention. The tell is decorative emphasis on a word the sentence already
+stresses.

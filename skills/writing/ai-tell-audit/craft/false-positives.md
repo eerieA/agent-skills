@@ -45,6 +45,62 @@ Do not rewrite a watched phrase when it appears inside:
 - Code, URLs, paths, commands, frontmatter (see the preserve-exactly list in
   `SKILL.md`).
 
+## Load-bearing clauses are not over-explanation
+
+The guard for the **E group**. Over-applied, E2 and E4 strip the one thing a piece of
+writing cannot regenerate. What that thing is depends on register, so the keep-test
+comes in two forms. Both ask the same underlying question: **does this clause add
+something the reader cannot get without it?**
+
+### Technical registers - the thing to protect is *why*
+
+Over-applied here, the E group removes what good engineering docs exist to carry. This
+repo's CLAUDE.md requires it: a comment recording a gotcha or a decision's *why* "is
+correct at any length".
+
+| Keep | Cut |
+|---|---|
+| A **guard** against a plausible-but-wrong change (*don't select X; it needs two sweeps*) | Defending a choice already made against a reader who wasn't arguing |
+| A **gotcha** that still bites (*missing this 401s the health panel*) | Restating the point in different words |
+| Why a **non-obvious** option was chosen over the obvious one | Rating the choice (*the natural fit*, *exactly right*) |
+| A **consequence** the reader can't derive (*this drops unsaved work*) | Pre-empting an objection nobody raised |
+| Evidence for a claim someone will doubt (*bitten by this once already*) | Explaining why the rule you just wrote is a good rule |
+
+Concretely: *"⚠️ `/health-endpoint` needs `credentials: 'include'` - miss it and the
+status panel 401s"* is a **keep**. The consequence is not derivable and prevents a real
+bug. But *"...and that would be wrong in the dangerous direction, since it reads as
+'that doesn't exist' while someone may still be using it"* appended to an already-clear
+instruction is a **cut**.
+
+### Expressive registers - the thing to protect is *voice and implication*
+
+In fiction, essays, and personal writing there are no gotchas to preserve, and the
+keep-test changes accordingly: a clause earns its place by doing **tonal or
+characterizing** work, not by preventing a mistake. The failure mode here is the
+opposite of the technical one - not a lost gotcha, but prose planed down to competent
+flatness. A hedging clause may be the narrator hedging *in character*; cut it and you
+have edited the person, not the sentence.
+
+| Keep | Cut |
+|---|---|
+| A qualifier that **reverses or complicates** the sentence (*She said nothing, and went on drying the plate*) | A qualifier that only confirms the reader read correctly (*which was not the same as agreeing*) |
+| **Judgment that reveals the judge** - a narrator with opinions, in first or close third | Judgment from the authorial seat, grading the material (*a genuinely remarkable meal*) |
+| A **digression, aside, or self-correction** in the writer's own voice | Narration that glosses the beat the scene just landed |
+| Deliberate **repetition for rhythm or incantation** | Restating the image in plainer words in case it missed |
+| **Overwriting that is the character's** - a florid narrator, an unreliable one | Overwriting that is nobody's, decorating a neutral narration |
+
+Concretely: *"He put the photograph back in the drawer"* is finished. The appended
+*"though not because he had stopped wanting to look at it"* is a **cut** - it explains
+the gesture the gesture already made. But in a narrator established as compulsively
+self-explaining, that same clause is characterization; keep it and flag nothing.
+
+### When a clause could read either way, leave it
+
+True in both registers, for different reasons. A doc that over-explains is mildly
+annoying; a doc that lost its only record of why is a bug waiting to happen. A story
+that over-explains is mildly annoying; a story edited into voicelessness is no longer
+the writer's. The cost of a wrong cut is always higher than the cost of a wrong keep.
+
 ## Register overrides voice findings
 
 The Voice-tier tells (C-group) are **correct writing** for reference/technical/legal
