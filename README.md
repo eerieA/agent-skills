@@ -32,12 +32,15 @@ Skills usable via the `Skill` tool or a `/slash-command`, grouped by domain (`sw
 |---|---|
 | `swe/code-smell-audit` | Code-smell audit and refactor - scans for silent fallbacks, dead code, missing guards, and other reliability anti-patterns, then fixes what you approve. Invoke with `/code-smell-audit`. |
 | `swe/cicd-pipeline` | Platform-agnostic CI/CD deployment pipeline design and review - stage flow, approval and metric gates, choosing a rollout strategy (rolling/blue-green/canary/feature-flag), safe rollback with backward-compatible migrations, health checks that don't lie, and build-once-promote-the-same-artifact. Applies to any runner and any target; ends with a design-review checklist. |
+| `swe/docs-prose-compaction` | Compact documentation and code prose - comments, engineering docs, runbooks, commit messages, PR descriptions - by cutting what a competent reader recovers for free. Classifies each sentence as fact / derivable / narration / stamp / flourish and cuts the last four. Judged against reader cost, not a word budget: a long comment carrying a gotcha is correct at any length. Reference prose only, not fiction. Invoke with `/docs-prose-compaction`. |
 | `swe/gql-frontend-arch` | Architecture guidance for a frontend web app on a GraphQL backend - module boundaries, state/data-fetching, where logic lives, the API seam, tables, forms, and testing strategy. |
 | `swe/react-best-practices` | Senior-level guidance for building and reviewing production React + TypeScript - component architecture, hooks, state management (Context, Redux Toolkit, TanStack Query), performance, Server Components, testing, and UI/interaction polish. |
 | `swe/safe-refactor` | Language- and framework-agnostic refactoring discipline - restructuring code without changing behavior via the safety loop (small steps, tests green after each, commit rhythm), when NOT to refactor, and a catalog of concrete refactoring operations. |
 | `swe/testing-discipline` | Language- and framework-agnostic testing discipline - test-first / prove-it-with-a-failing-test workflow, what makes a test good, how to size a suite (unit/integration/e2e), and fuzz/property testing for combinatorial systems with reproducible seeds. |
 
 > `swe/safe-refactor` is recommended to be used together with `swe/code-smell-audit` (to find what to change) and `swe/testing-discipline` (for the tests the safety loop leans on), but it works standalone and requires neither.
+
+> `swe/docs-prose-compaction` and `writing/ai-tell-audit` split by *what's wrong with the sentence*: compaction cuts prose carrying nothing new; the tell audit fixes prose that carries its information but reads as machine-written. Reach for compaction when a doc is bloated, the tell audit when it sounds wrong.
 
 #### UI/UX
 
@@ -57,7 +60,7 @@ Skills usable via the `Skill` tool or a `/slash-command`, grouped by domain (`sw
 | `writing/world-audit` | Audit an existing fiction world - scans your notes, bible, or draft for missing rules, contradictions, unbounded magic/tech, infodump risk, and thin sensory detail, then fixes what you approve. Invoke with `/world-audit`. |
 | `writing/character-building` | Interactive fiction character-building - interviews you to build one character in depth or a whole cast web, centering the want-vs-need contradiction, the ghost and lie, and revelation through choice under pressure. Invoke with `/character-building`. |
 | `writing/character-audit` | Audit existing fiction characters - scans your profiles, notes, or draft for want-without-need, flat/too-perfect/too-evil characters, obstacle-only opponents, dumped characterization, and dialogue without subtext, then fixes what you approve. Invoke with `/character-audit`. |
-| `writing/ai-tell-audit` | Audit prose for AI writing tells - detects and advises fixes for puffery, overused AI vocabulary, negative parallelism, superficial -ing tails, em dashes, chatbot residue, and citation hallucination, severity-ranked and cluster-gated to avoid over-correcting. Detect-and-advise, never a silent rewrite; register-aware; a light script keeps its phrase lists synced with Wikipedia. Invoke with `/ai-tell-audit`. |
+| `writing/ai-tell-audit` | Audit prose for AI writing tells - detects and advises fixes for puffery, overused AI vocabulary, negative parallelism, superficial -ing tails, em dashes, chatbot residue, over-explanation (defending a choice already made, rating your own material, clauses that gloss the point just made), and citation hallucination, severity-ranked and cluster-gated to avoid over-correcting. Works across registers - technical docs as well as essays, fiction, and marketing - and the register decides both which tells apply and what counts as load-bearing: the same clause can be a cut in a design doc and characterization in a novel. Detect-and-advise, never a silent rewrite; a light script keeps its phrase lists synced with Wikipedia. Invoke with `/ai-tell-audit`. |
 
 ## Usage
 
