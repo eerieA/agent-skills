@@ -129,6 +129,103 @@ Pick the owning file, leave that copy whole, replace the other with a pointer.
 The highest-value cut in the catalog: it removes a line count *and* a future
 contradiction. See `keep-rules.md` → one owner per fact.
 
+### Sibling-conformance note
+
+Prose observing that this module resembles its siblings — "mirroring the sibling
+`create*Form` modules", "the same split as `stretchedParticipants.ts` /
+`createVlanForm.ts`", "the same `blockedReason` contract as `deleteEligibility.ts`",
+"matching `deleteVlanConfirm`'s reasoning".
+
+```
+// BEFORE
+// Domain constants + pure form logic for the Create-RA-VPN wizard (WF31), mirroring its
+// sibling create*Form modules. See docs/design/wireframe-create-ravpn.md.
+
+// AFTER
+// Domain constants + pure form logic for the Create-RA-VPN wizard (WF31).
+```
+
+Conformance is visible in the naming and the signature; the sibling list is a maintenance
+liability that grows with every new sibling and is never pruned. It also answers a
+question nobody asks at the call site — a reader wants to know what *this* returns, not
+which other files agree with it.
+
+**Keep when the sibling is the reason**, not the resemblance: "ordered to match
+`X`'s steps because they render in one shared shell" is a coupling, and a coupling is a
+fact. Test: if the sibling were deleted, would this code need to change? Yes → coupling,
+keep. No → conformance, cut.
+
+### Motivation tail on a stated hazard
+
+A hazard is stated, then closed with a sentence arguing that handling it this way is the
+right call — "catching the obvious case up front is worth it; treating this as the
+guarantee is not", "blocking with the reason shown is the honest outcome", "widen the
+read, don't only add a picker".
+
+```
+// BEFORE
+// ⚠️ THE DUPLICATE CHECK IS A COURTESY, NOT THE AUTHORITY. It compares against the pools
+// THIS PAGE has loaded, which is a snapshot — the API is what actually refuses (a FAILED
+// poll). Catching the obvious case up front is worth it; treating this as the guarantee
+// is not.
+
+// AFTER
+// ⚠️ THE DUPLICATE CHECK IS A COURTESY, NOT THE AUTHORITY. It compares against the pools
+// THIS PAGE has loaded, which is a snapshot — the API is what actually refuses (a FAILED
+// poll).
+```
+
+Distinct from **the closing verdict** (a flourish, self-congratulation) and from a
+**guard** (which forbids a specific wrong change). This tier argues that the *existing*
+code is correct — a defence against an objection the reader hasn't raised. The hazard
+itself is the fact; whether we were right to accept it is settled by the code shipping.
+
+⚠️ The boundary is thin, and `keep-rules.md` → guards wins ties. "Don't fall back to the
+VN-owning pair" names a change and forbids it: keep. "Blocking is the honest outcome"
+praises what's already there: cut. If the sentence would stop a specific edit, it is a
+guard however editorial it sounds.
+
+### Second worked example
+
+`keep-rules.md` protects **one** worked example where the rule is abstract. The second
+example of the same rule is derivable from the first.
+
+```
+// BEFORE
+// Case-insensitive, matching deleteVlanConfirm's reasoning: NetBox names are effectively
+// case-insensitive to an operator, so "STAFF-POOL-2" vs "staff-pool-2" reads as the same
+// collision and warning early beats a downstream refusal.
+
+// AFTER
+// Case-insensitive: NetBox names are effectively case-insensitive to an operator.
+```
+
+Here the *rule* ("effectively case-insensitive to an operator") is concrete enough that
+the illustration adds nothing — `.toLowerCase()` sits two lines below. Cut the example
+when the rule states the mechanism; keep it when the rule is abstract and the example is
+the only concrete thing in the block.
+
+### Elaborated parenthetical
+
+The parenthetical cross-reference's larger sibling: a clause that qualifies a fact with a
+case, an exception, or a mechanism the reader does not need in order to act.
+
+```
+// BEFORE  ... or it has no owning BP (e.g. GRT — an EVPN VRF always has one).
+// AFTER   ... or it has no owning BP.
+
+// BEFORE  They are different objects (I50) that only coincide when a VN happens to be
+//         owned by the connected pair, so a fallback would provision onto the wrong pair
+// AFTER   They are different objects (I50), so a fallback would provision onto the wrong pair
+```
+
+The qualifier is true and interesting and changes nothing: the code handles the null
+either way, and the fallback is forbidden whether or not the two ever coincide. Test the
+clause, not the sentence — **does this sub-clause change what the reader does?**
+
+Watch the interaction with **load-bearing precision**: `name__ie` being exact-not-contains
+decides whether the check is sound, so it survives. The GRT case decides nothing.
+
 ### Instance state duplicated from a ledger
 
 Specific dev-environment inventory (names, ids, which pod) inside a code comment, when a
@@ -238,6 +335,32 @@ sets of facts.
 
 Both are derivable from the body. Cut the conclusion first — a conclusion is never
 navigation, whereas an overview may be a genuine map in a long document.
+
+### Header demoted to a title
+
+A block header that opens by locating the module — its route, its spec, its layout, its
+place in the feature — where only the first clause identifies it and the rest describes
+what the file's own contents show.
+
+```
+// BEFORE
+// Services → RA VPN. One collapsible box per RA VPN; the title is just the name, and the
+// key identifiers sit in a metadata row inside the box, above that RA VPN's pools table
+// (spec: services/ra-vpn.md, client prototype).
+
+// AFTER
+// Services → RA VPN. One collapsible box per RA VPN.
+```
+
+The layout description is narration of JSX thirty lines down, and it goes stale the first
+time the row moves. What survives is the part a reader cannot get by scrolling: **where
+this file sits in the product**. A file header earns roughly one sentence of orientation
+plus whatever is genuinely non-local (a cross-file contract, a hazard the whole module
+shares).
+
+Sequence this with the **duplicated rationale** move: consolidating a fact *into* a header
+makes the header the owner, which then tempts you to let it sprawl. Consolidate, then
+re-cut the header as its own block.
 
 ### Split blocks that stay split
 

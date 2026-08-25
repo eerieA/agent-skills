@@ -117,6 +117,16 @@ actionable. "38% more concise" is not, and invites cutting to hit a number.
   deletion. Reject it.
 - **Reflow after cutting.** Once sentences are gone, rewrap the block. Fewer, fuller
   lines beat preserved line breaks around a hole.
+- **Never reflow in the same pass as cutting.** Cut first, leave the ragged lines, then
+  reflow as a separate step. Rewrapping while cutting makes the block *look* finished at
+  every intermediate state, and a tidy-looking block stops getting read — the surviving
+  derivable sentence rides along because the shape is no longer alarming. Ragged output
+  keeps the remaining candidates visible.
+- **Then take a second pass on what survived.** The first pass removes the sentences that
+  were always cuttable. The second asks a question only answerable afterwards: *now that
+  the block is short, is each surviving sentence still worth its share?* A qualifier that
+  reads as helpful detail inside twelve lines reads as padding inside four. Compaction
+  changes what counts as proportionate, so one pass systematically under-cuts.
 - **One owner per fact.** When the same rationale appears in two files, do not trim both
   — pick the file that *owns* it (the one whose code the fact is about), leave that copy
   whole, and replace the other with a pointer. Two half-statements are worse than one
