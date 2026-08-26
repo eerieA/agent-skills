@@ -85,6 +85,13 @@ Rules that make the loop work:
 - **Automated tools are safer than hand-edits.** Prefer the IDE/language-server refactor
   (rename symbol, extract function, move) over manual find-and-replace — it updates all
   references and won't typo a call site.
+- **A consolidation needs a completeness check as well as the behavior check.** Green tests
+  prove you broke nothing; they cannot prove you *finished*, because "no duplicate copies
+  remain" is not a behavioral property. So a refactor that removes duplication ends with a
+  search that must come back empty — `grep` for the construct you were eliminating, scoped to
+  where it lived. State it as the step's verification alongside the suite: *"→ verify: suite
+  green, and no `const buttonBase` hits under `src/features/`."* Two different claims, two
+  different checks.
 
 ### No tests yet? Characterize first.
 
@@ -168,6 +175,26 @@ is the *how*.
 - **Rename** — a first-class refactoring, not a cosmetic afterthought. A precise name
   removes the need for a comment. Use the tool-assisted rename so every reference updates.
 
+#### Two checks before extracting a shared home
+
+Both apply when the move is *consolidation* — N copies collapsing into one — and both belong
+before the first edit, not after.
+
+- **Search for the shared home before creating it.** Half-finished consolidations are common:
+  someone extracted the same helper for two of the six call sites and stopped, often leaving a
+  comment that says so. Create a second shared module beside it and you have reproduced the
+  original duplication one level up — which is usually how the current mess formed. Grep for
+  the thing you are about to write, by name and by one of the values it would hold, and prefer
+  extending what you find over adding a sibling to it.
+- **Diff the copies first; if they differ, that is a behavior change, not a refactor.** Extract
+  Module assumes the copies are the same. When they are not, consolidating picks a winner and
+  the losing call sites change observable output — a second hat, and one the safety loop will
+  not catch if no test asserts the differing property. So decide which value is correct and
+  land that decision as its own step *before* extracting. (`code-smell-audit`'s "duplicated
+  source of truth" covers how to weigh the variants, including why the majority isn't
+  automatically right; if the project doesn't use it, the rule is just: compare all the copies
+  deliberately, and record why the winner won.)
+
 ### Removing
 
 - **Remove Dead Code** — delete unreachable code, unused parameters, and commented-out
@@ -206,3 +233,5 @@ when it doesn't, ignore the reference and proceed with this skill alone.
 - [ ] Each step is a named refactoring operation, committed while green
 - [ ] The concrete improvement can be stated in one sentence
 - [ ] No pattern or abstraction was introduced without repeated, real duplication to justify it
+- [ ] *If it was a consolidation:* the copies were diffed and any difference decided as its own
+      step; no pre-existing shared home was overlooked; a search confirms no copies remain

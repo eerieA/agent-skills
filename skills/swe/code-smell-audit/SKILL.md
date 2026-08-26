@@ -252,6 +252,18 @@ table from the enum (codegen/build step), read the key from the single constant,
 startup assertion that the copies agree, so drift fails loudly instead of silently. Don't
 add a heavy abstraction for a single pair — a check that they match may be enough.
 
+**Before collapsing the copies, diff them — the drift may have already happened.** This
+smell is *reported* as "these should agree", but by the time it is found they often already
+disagree, and the fix silently picks a winner. Enumerate every copy and compare the actual
+values first. If they match, the consolidation is a pure refactor. If they don't, the
+disagreement is a **behavior question that must be answered before any code moves** — which
+value is correct, and what changes at the call sites now reading the other one? Answer it
+explicitly (and record why), then consolidate. Never let the choice fall out of whichever
+copy you happened to open first, and never assume the majority is right: the odd one out is
+sometimes the copy someone deliberately fixed. Note this in the finding itself when the
+copies differ — it raises the severity, because a live inconsistency is not the same as a
+maintenance hazard.
+
 ---
 
 ### 11. Delay as synchronization — a timing band-aid over an ordering bug (High)
