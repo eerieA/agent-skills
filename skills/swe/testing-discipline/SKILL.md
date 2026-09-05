@@ -76,6 +76,36 @@ run the full suite           →  no regressions
 A reproduction test written *before* the fix tests behavior; one written after tends to
 just enshrine whatever the fix happened to do.
 
+### When you can't go test-first, prove the test another way
+
+Test-first gets one thing for free that is easy to lose sight of: the RED step is not
+just workflow, it is the **only** evidence the test can fail at all. A green test says
+something about the code only if it would have gone red.
+
+Sometimes RED isn't available — you are covering code that already exists and already
+works, or writing the test after a fix that is already in. That is legitimate; the
+obligation it creates is to supply the missing proof retroactively: **break the behavior
+on purpose and confirm the test fails.** Revert the guard, invert the condition, delete
+the line, then restore. If the suite stays green, the test is not testing what its name
+says.
+
+This catches the one failure review cannot: a test that asserts on something that cannot
+vary. A teardown test reading state frozen at unmount passes whether or not the teardown
+runs — it looks like coverage, reads like coverage in review, and pins nothing.
+
+Reserve this for tests you could not write first. Tests that earned a real RED already
+have their proof, and re-deriving it for a whole suite is a poor use of the time.
+
+Two rules make the check trustworthy:
+
+- **Assert that the mutation applied.** A find-and-replace whose pattern silently matched
+  nothing reports "still green", and you will read that as the test passing. Make a missing
+  anchor fail loudly, or you have verified nothing twice.
+- **Expect some survivors, and say why.** A mutant that lives is not automatically a gap —
+  often it means two guards protect the same outcome and either alone suffices. Record
+  which, in a comment at the test. An unexplained survivor is a gap; an explained one is a
+  design note.
+
 ## What Kind of Test
 
 Invest effort by shape: most tests small and fast, progressively fewer as they get
@@ -196,6 +226,7 @@ invariants flaky. That same order-dependence is a code smell in its own right; s
 
 - [ ] Every new behavior has a corresponding test
 - [ ] Bug fixes include a reproduction test that failed before the fix
+- [ ] Any test that never had a RED step was proven by breaking the behavior it claims to pin
 - [ ] Tests assert observable outcomes, not internal call sequences
 - [ ] Tests pass individually and in any order (isolated state)
 - [ ] Test names describe the behavior being verified
